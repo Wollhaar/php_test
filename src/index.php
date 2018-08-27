@@ -1,21 +1,28 @@
 <?php
 
 $form = $_POST;
-// continues....
+
+$area = $form['amount'];
+$divisor_hello = $form['output_hello'];
+$divisor_world = $form['output_world'];
+
+if ($form['restart'] == 1) {
+    reset($form);
+}
+$output = [];
 
 // the for loop for output hello and world
-for($i = 0; $i = 100; $i++) {
-    if (!is_float($i / 3)) {
-        echo 'Hello';
-    }
-    elseif (!is_float($i / 5)) {
-        echo 'World';
-    }
-    else {
-        echo $i;
+if ($form['form'] == 1) {
+    for ($i = 1; $i <= $area; $i++) {
+        if (!($i % $divisor_hello)) {
+            array_push($output, 'Hello');
+        } elseif (!($i % $divisor_world)) {
+            array_push($output, 'World');
+        } else {
+            array_push($output, $i);
+        }
     }
 }
-
 ?>
 
 <html>
@@ -33,15 +40,15 @@ for($i = 0; $i = 100; $i++) {
             <input type="hidden" name="form" value="1">
             <label for="amount"><b>Die Counterarea</b> - zwischen welchen Zahlen darf gezählt werden?</label>
             <input type="text" name="amount" id="amount" /><br/><br/>
-            <label for="ouput_hello"><b>Die Dividende für 'Hello'</b></label>
-            <input type="text" name="output_hello" id="ouput_hello" /><br/><br/>
-            <label for="output_world"><b>Die Dividende für 'World'</b></label>
+            <label for="output_hello"><b>Der Divisor für 'Hello'</b></label>
+            <input type="text" name="output_hello" id="output_hello" /><br/><br/>
+            <label for="output_world"><b>Der Divisor für 'World'</b></label>
             <input type="text" name="output_world" id="output_world" /><br/><br/>
             <button type="submit">Starten</button>
         </form>
     </div>
 <!--     Ausgabe     -->
-    <?php elseif ($form == 1): ?>
+    <?php elseif ($form['form'] == 1): ?>
     <div class="output">
         <?php foreach ($output as $value): ?>
         <span><?php echo $value; ?></span><br/>
