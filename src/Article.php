@@ -56,7 +56,7 @@ class Article {
                 . 'kg_id, '
                 . 'price) '
                 . 'VALUES (LAST_INSERT_ID, :kg_id, :price)');
-        
+
         $pdo->bindParam(':h_id', $product['number_hersteller'], PDO::PARAM_INT);
         $pdo->bindParam(':k_id', $product['number_kategorie'], PDO::PARAM_INT);
         $pdo->bindParam(':name', $product['name'], PDO::PARAM_STR);
@@ -136,14 +136,14 @@ class Article {
         $pdo = $this->getDBConnection();
         
         $pdo->prepare('UPDATE article SET '
-                . 'h_id, '
-                . 'k_id, '
-                . 'name, '
-                . 'description, '
-                . 'zolltarif_nr, '
-                . 'isbn, '
-                . 'ean, '
-                . 'mpn '
+                . 'h_id = :h_id, '
+                . 'k_id = :k_id, '
+                . '`name` = :`name`, '
+                . 'description = :description, '
+                . 'zolltarif_nr = :zolltarif, '
+                . 'isbn = :isbn, '
+                . 'ean = :ean, '
+                . 'mpn = :mpn'
                 . 'WHERE art_nr = :art_nr;');
         
         $pdo->bindParam(':art_nr', $product['article_nr'], PDO::PARAM_INT);
